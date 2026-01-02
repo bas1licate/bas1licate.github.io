@@ -1,0 +1,12 @@
+---
+layout: page
+title: "basic email validator template"
+permalink: /email
+---
+<html lang="en"><style>
+html {padding:7mm;font:0.999rem sans-serif}
+input {padding:calc(3.14pc/6.28)}
+#output-area {margin-top:calc(1.25rem*1.1);padding:1pc;border:0.999px solid #ccc;background-color:#eee}
+</style><label for="in">Email:</label><input type="text" id="in" placeholder="email@example.com">
+<p id="out"></p><script>const email = document.getElementById('in'); const valid = document.getElementById('out');
+email.addEventListener('input', function(a) {valid.textContent = a.target.value.toString().includes('@') ? "✅" : "❌🚫INCORRECT! FILL IN A COMPLETE EMAIL ADRESS!🚫❌";});</script></html>
