@@ -4,8 +4,8 @@ title: "jeffrey's feed, or at least what i found of it"
 permalink: /jeffreyqrae
 ---
 
-in the recent batch of epstein files, there was a quora digest.  
-i took it upon myself to find every question/answer in there.  
+in the of epstein files, there are some quora digesst.  
+i took it upon myself to find every question/answer in one of them.  
 i found every question, and in all but 1 i found the answer.
 
 link|type
