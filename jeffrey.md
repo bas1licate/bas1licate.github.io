@@ -10,13 +10,13 @@ i found every question, and in all but 1 i found the answer.
 
 link|q/a?
 ---|---
-https://qr.ae/pCl79X|a
-https://qr.ae/pCl7i1|a
-https://qr.ae/pCl7g9|a
-https://qr.ae/pCl7e2|q
-https://qr.ae/pCl796|a
-https://qr.ae/pCl7eC|a
-https://qr.ae/pCl7e9|a
-https://qr.ae/pCl7iF|a
-https://qr.ae/pCl7aZ|a
-https://qr.ae/pCl7eP|a
+[9X](https://qr.ae/pCl79X)|a
+[i1](https://qr.ae/pCl7i1)|a
+[g9](https://qr.ae/pCl7g9)|a
+[e2](https://qr.ae/pCl7e2)|q
+[96](https://qr.ae/pCl796)|a
+[eC](https://qr.ae/pCl7eC)|a
+[e9](https://qr.ae/pCl7e9)|a
+[iF](https://qr.ae/pCl7iF)|a
+[aZ](https://qr.ae/pCl7aZ)|a
+[eP](https://qr.ae/pCl7eP)|a
