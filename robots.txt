@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /index2.md
+Crawl-delay: 5
