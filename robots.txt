@@ -1,3 +1,6 @@
 User-agent: *
 Disallow: /*.md
 Crawl-delay: 5
+User-agent: PerplexityBot
+Disallow: /
+Crawl-delay: 31556952
