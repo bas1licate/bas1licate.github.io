@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "index2.html"
+title: "index 2!"
 permalink: /index2.html
 ---
 # index of pages
@@ -8,4 +8,5 @@ permalink: /index2.html
 [index of pages](../index2.html)(you are here)  
 [email](../email)  
 [jeffrey qr.ae](../jeffreyqrae)  
-[disregard](../disregard)
+[disregard](../disregard)  
+[a presentation.](../presentation1)  
