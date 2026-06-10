@@ -4,10 +4,10 @@ title: BMP header generator
 permalink: /bmpgen
 ---
 <style>html {font-family: sans-serif}</style>
-<textarea placeholder="paste your thing here" id="textinput" name="textinput"></textarea><br />
-<label>or upload: <input type=file id="fileinput" name="fileinput"/></label><br />
+<textarea placeholder="paste your thing here" id="john" name="textinput"></textarea><br />
+<label>or upload: <input type=file id="fileinput" name="george"/></label><br />
 <button onclick="gentext()">generate from text</button><button onclick="genfile()">generate from file</button><br />
-<input readonly placeholder="output will go here"/>
+<input readonly id="inoutput" name="rachel" placeholder="output will go here"/>
 <script>// baby
 function getlwh(s) {
   let r = [1,1]
@@ -48,5 +48,5 @@ function gentext() {
 }
 function genfile() {
   const header = genhead(document.getElementById('fileinput').files[0].size)
-  console.log(header); window.alert(header)
+  console.log(header); window.alert(header); document.getElementById('inoutput').value = header;
 }</script>
