@@ -44,7 +44,7 @@ function genhead(size) {
 }
 function gentext() {
   const header = genhead(document.getElementById('textinput').value.length)
-  console.log(header); window.alert(header)
+  console.log(header); window.alert(header); document.getElementById('inoutput').value = header;
 }
 function genfile() {
   const header = genhead(document.getElementById('fileinput').files[0].size)
