@@ -12,7 +12,7 @@ permalink: /bmpgen
 function getlwh(s) {
   let r = [1,1]
   r.push(s%4 == 0 ? 4 : s%3 == 0 ? 3 : s%2 == 0 ? 2 : 1)
-  let t = s/r[2]; let q = [];
+  let t = s/r[2]; let q = []; if (Math.floor(t**(0.5))**2==t) {r[0] = Math.floor(t**(0.5)); r[1] = r[0]; return r}
   wloop: while (t > Math.sqrt(s)) {
     for (let i = 2; i<=Math.sqrt(t); i++) {if (t%i == 0) {q.push(i); t/=i; break} else if (i+1 >= Math.sqrt(t)) {break wloop}}}
   r[0] = q.reduce((a,c) => a*c,1); r[1] = t; return r
