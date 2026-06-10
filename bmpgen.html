@@ -1,0 +1,52 @@
+---
+layout: page
+title: BMP header generator
+permalink: /bmpgen
+---
+<style>html {font-family: sans-serif}</style>
+<textarea placeholder="paste your thing here" id="textinput" name="textinput"></textarea><br />
+<label>or upload: <input type=file id="fileinput" name="fileinput"/></label><br />
+<button onclick="gentext()">generate from text</button><button onclick="genfile()">generate from file</button><br />
+<input readonly placeholder="output will go here"/>
+<script>// baby
+function getlwh(s) {
+  let r = [1,1]
+  r.push(s%4 == 0 ? 4 : s%3 == 0 ? 3 : s%2 == 0 ? 2 : 1)
+  let t = s/r[2]; let q = [];
+  wloop: while (t > Math.sqrt(s)) {
+    for (let i = 2; i<=Math.sqrt(t); i++) {if (t%i == 0) {q.push(i); t/=i; break} else if (i+1 >= Math.sqrt(t)) {break wloop}}}
+  r[0] = q.reduce((a,c) => a*c,1); r[1] = t; return r
+}
+function revend4(be) {
+  return be.slice(6)+be.slice(4,6)+be.slice(2,4)+be.slice(0,2)
+}
+function genhead(size) {
+  size = 4*Math.ceil(size/4)
+  let hexcodes = ""; const noseq = "00000000";
+  hexcodes += "424D"
+  hexcodes += revend4((54+size).toString(16).toUpperCase().padStart(8,"0"))
+  hexcodes += noseq
+  hexcodes += "36000000"
+  hexcodes += "28000000"
+  const dims = getlwh(size)
+  size = 4*Math.ceil(size/4)
+  hexcodes += revend4(dims[0].toString(16).toUpperCase().padStart(8,"0"))
+  hexcodes += revend4(dims[1].toString(16).toUpperCase().padStart(8,"0"))
+  hexcodes += "0100"
+  hexcodes += "2000" //revend4((dims[2]*8).toString(16).padStart(4,"0")) will always output that so
+  hexcodes += noseq
+  hexcodes += noseq
+  hexcodes += "130B0000"
+  hexcodes += "130B0000"
+  hexcodes += noseq
+  hexcodes += noseq
+  return hexcodes
+}
+function gentext() {
+  const header = genhead(document.getElementById('textinput').value.length)
+  console.log(header); window.alert(header)
+}
+function genfile() {
+  const header = genhead(document.getElementById('fileinput').files[0].size)
+  console.log(header); window.alert(header)
+}</script>
