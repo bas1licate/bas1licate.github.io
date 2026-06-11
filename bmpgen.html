@@ -22,8 +22,7 @@ function revend4(be) {
 }
 function genhead(size) {
   size = 4*Math.ceil(size/4)
-  let hexcodes = ""; const noseq = "00000000";
-  hexcodes += "424D"
+  let hexcodes = "424D"; const noseq = "00000000";
   hexcodes += revend4((54+size).toString(16).toUpperCase().padStart(8,"0"))
   hexcodes += noseq
   hexcodes += "36000000"
