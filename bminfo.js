@@ -29,9 +29,9 @@ async function genfull(file): {
   const full = new Uint8Array(fs)
   full.set(Head1,0); full.set(Head2,14);
   full.set(c,54)
-  for (let i = o, j = 0, k=0,row = new Array(n),rrow,ow; k<dim[1]; i+=dim[0]+bpr,j+=dim[0],k++)
-  {rrow = bytes.slice(j,j+dim[0]); for (let z = 0; z < dim[0]; z+=3) {row[z/3] = rrow.slice(z,z+3)}; ow = new Uint8Array(...row.reverse());
-   full.set(ow,i); full.set(p,dim[0]+i)}
+  for (let i = o, j = 0, k=0,row = new Array(n),rrow; k<dim[1]; i+=dim[0]+bpr,j+=dim[0],k++)
+  {rrow = bytes.slice(j,j+dim[0]); for (let z = 0; z < dim[0]; z+=3) {row[z/3] = Array.from(rrow.slice(z,z+3))};
+   full.set(new Uint8Array(row.reverse().flat()),i); full.set(p,dim[0]+i)}
   return full
 }
 export default genfull
