@@ -1,13 +1,14 @@
-function genfull(inputFile): {
+async function genfull(file): {
   // once upon a time, there was a boy
   const byte = ((base) => new Uint8Array(base.buffer))
   const feet = ((baby) => new Uint8Array([baby,baby>>8,baby>>16,baby>>24])) // unhappy birthday to you
   const bury = ((king) => new Uint8Array([king,king>>8])) // royal work of art
-  const outputFiles = [];
-  if (file.bytes.byteLength > 0xFFFFFFFF) {throw new RangeError("too much data")}
-  if (file.bytes.byteLength > 0xFFFFFAFF) {console.warn("this file is especially large. successful conversion cannot be guaranteed.")}
-  else if (file.bytes.byteLength > 0x7FFFFFFF) {console.warn("this file is very large. conversion may not work on lower-end devices.")}
-  let bytes = new Uint8Array(file.bytes);
+  const readthis = new FileReader()
+  if (file.size > 0xFFFFFFFF) {throw new RangeError("too much data")}
+  if (file.size > 0xFFFFFAFF) {console.warn("this file is especially large. successful conversion cannot be guaranteed.")}
+  else if (file.size > 0x7FFFFFFF) {console.warn("this file is very large. conversion may not work on lower-end devices.")}
+  await readthis.readAsArrayBuffer(file)
+  let bytes = new Uint8Array(readthis.result);
   let isz = bytes.reverse().byteLength/* no way in theyll im naming it is */; let bd;
   switch (0) {
     case isz%4:bd=4;break//originally outside but it went missing
