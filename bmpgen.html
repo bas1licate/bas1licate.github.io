@@ -20,32 +20,10 @@ function getlwh(s) {
     for (let i = 2; i<=Math.sqrt(t); i++) {if (t%i == 0) {q.push(i); t/=i; break} else if (i+1 >= Math.sqrt(t)) {break wloop}}}
   r[0] = q.reduce((a,c) => a*c,1); r[1] = t; return r
 }
-function revend4(be) {
-  return be.slice(6)+be.slice(4,6)+be.slice(2,4)+be.slice(0,2)
-}
-function genhead(size, p1=false) {
-  const sp = 4*Math.ceil(size/4)-size; size += sp
-  let hexcodes = "424D"; const noseq = "00000000";
-  hexcodes += revend4((54+size).toString(16).toUpperCase().padStart(8,"0"))
-  hexcodes += noseq
-  hexcodes += "36000000"
-  hexcodes += "28000000"
-  const dims = getlwh(size)
-  hexcodes += revend4(dims[0].toString(16).toUpperCase().padStart(8,"0"))
-  hexcodes += revend4(dims[1].toString(16).toUpperCase().padStart(8,"0"))
-  hexcodes += "0100"
-  hexcodes += "2000" //revend4((dims[2]*8).toString(16).padStart(4,"0")) will always output that so
-  hexcodes += noseq
-  hexcodes += noseq
-  hexcodes += "130B0000"
-  hexcodes += "130B0000"
-  hexcodes += noseq
-  hexcodes += noseq
-  return (p1 ? hexcodes+"0A".repeat(sp) : hexcodes)
-}
 function gen(method) {
-  if (method == 'text') {const ls = document.getElementById('textinput').value.length}
-  if (method == 'file') {const ls = document.getElementById('fileinput').files[0].size}
-  const header = genhead(ls,document.getElementById('startpad').checked)
+  import doConvert from ./bminfo
+  if (method == 'text') {const ok = document.getElementById('textinput').value}
+  if (method == 'file') {const ok = document.getElementById('fileinput').files[0]}
+  const outputbytes = doConvert(ok)
   console.log(header); window.alert(header); document.getElementById('inoutput').value = header;
 }
