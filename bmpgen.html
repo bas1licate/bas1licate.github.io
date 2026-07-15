@@ -7,7 +7,7 @@ permalink: /bmpgen
 <textarea placeholder="paste your thing here" id="textinput" name="john"></textarea><br />
 <label>or upload: <input type=file id="fileinput" name="george"/></label><br />
 <button onclick="gen('text')">generate from text</button><button onclick="gen('file')">generate from file</button><br />
-<a id="inoutput" name="rachel" download>download output</a><br />
+<a id="inoutput" name="rachel" download>output will go here</a><br />
 <ul> options:
   none at the moment. <!-- name=joseph> </!-->
 </ul>
@@ -18,7 +18,7 @@ function gen(method) {
   if (method == 'file') {var ok = document.getElementById('fileinput').files[0]}
   try {var outbytes = genfull(ok).then((fdata) => fdata)}
   catch (e) {window.alert("an error occured: "+e.message); return}
-  object.assign(document.getElementById('inoutput'),{href: URL.createObjectURL(new Blob([outbytes],{type:"image/bmp"})), download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp")})
+  Object.assign(document.getElementById('inoutput'),{href: URL.createObjectURL(new Blob([outbytes],{type:"image/bmp"})), download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
   window.alert("file ready for download.")
 }
 </script>
