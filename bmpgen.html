@@ -13,7 +13,7 @@ permalink: /bmpgen
 </ul>
 <!--<script src="./bminfo.js"></script>-->
 <script type="module">// baby
-import { genfull } from ./bminfo.js
+import genfull from './bminfo.js'
 function gen(method) {
   if (method == 'text') {var ok = new File([document.getElementById('textinput').value],"johnresult.txt")}
   if (method == 'file') {var ok = document.getElementById('fileinput').files[0]}
