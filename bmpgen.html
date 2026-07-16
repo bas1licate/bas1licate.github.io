@@ -13,12 +13,12 @@ permalink: /bmpgen
 </ul>
 <!--<script src="./bminfo.js"></script>-->
 <script type="module">// baby
-import genfull from ./bminfo.js
+import { genfull } from ./bminfo.js
 function gen(method) {
   if (method == 'text') {var ok = new File([document.getElementById('textinput').value],"johnresult.txt")}
   if (method == 'file') {var ok = document.getElementById('fileinput').files[0]}
   try {var outbytes = genfull(ok).then((fdata) => fdata)}
-  catch (e) {window.alert("an error occured: "+e.message); return}
+  catch (e) {window.alert("an error occured: "+e.message); console.error(e); return}
   Object.assign(document.getElementById('inoutput'),{href: URL.createObjectURL(new Blob([outbytes],{type:"image/bmp"})), download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
   window.alert("file ready for download.")
 }
