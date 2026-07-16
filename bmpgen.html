@@ -45,14 +45,14 @@ async function genfull(file) {
   for (let i = o, j = 0, k=0,row = new Array(dim[0]/bd),rrow; k<dim[1]; i+=dim[0]+bpr,j+=dim[0],k++)
   {rrow = bytes.slice(j,j+dim[0]); for (let z = 0; z < dim[0]; z+=bd) {row[z/bd] = Array.from(rrow.slice(z,z+bd))};
    full.set(new Uint8Array(row.reverse().flat()),i); full.set(p,dim[0]+i)}
+  // i'm so tired of trying so hard and not getting it right
   return full}
 function gen(method) {
   if (method == 'text') {var ok = new File([document.getElementById('textinput').value],"johnresult.txt")}
   if (method == 'file') {var ok = document.getElementById('fileinput').files[0]}
-  
-  try {genfull(ok).then(fdata => (var outer = document.getElementById('aoutput')).href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
+  const outer = document.getElementById('aoutput')
+  try {genfull(ok).then(fdata => outer.href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
   catch (e) {window.alert("an error occured: "+e.message); console.error(e); return}
-  
   Object.assign(document.getElementById('inoutput'),{download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
   window.alert("file ready for download."); return outbytes}
 </script>
