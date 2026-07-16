@@ -53,6 +53,6 @@ function gen(method) {
   const outer = document.getElementById('aoutput')
   try {genfull(ok).then(fdata => outer.href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
   catch (e) {window.alert("an error occured: "+e.message); console.error(e); return}
-  Object.assign(document.getElementById('inoutput'),{download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
+  Object.assign(outer,{download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
   window.alert("file ready for download."); return outbytes}
 </script>
