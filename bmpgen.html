@@ -22,8 +22,8 @@ async function genfull(file) {
   if (file.size > 0xFFFFFAFF) {console.warn("this file is especially large. successful conversion cannot be guaranteed.")}
   else if (file.size > 0x7FFFFFFF) {console.warn("this file is very large. conversion may not work on lower-end devices.")}
   await readthis.readAsArrayBuffer(file)
-  let bytes = new Uint8Array(readthis.result);
-  let isz = bytes.reverse().byteLength/* no way in theyll im naming it is */; let bd;
+  let bytes = new Uint8Array(readthis.result); bytes.reverse()
+  let isz = file.size/* no way in theyll im naming it is */; let bd;
   switch (0) {
     case isz%3: bd=3;break
     case isz%2: bd=2;break
