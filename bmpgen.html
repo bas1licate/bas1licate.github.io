@@ -50,9 +50,10 @@ async function genfull(file) {
 function gen(method) {
   if (method == 'text') {var ok = new File([document.getElementById('textinput').value],"johnresult.txt")}
   if (method == 'file') {var ok = document.getElementById('fileinput').files[0]}
-  try {var outbytes = genfull(ok).then((fdata) => fdata)}
+  
+  try {var outbytes = genfull(ok).then(fdata => fdata).catch(e => console.error("something went issue",e))}
   catch (e) {window.alert("an error occured: "+e.message); console.error(e); return}
+  
   Object.assign(document.getElementById('inoutput'),{href: URL.createObjectURL(new Blob([outbytes],{type:"image/bmp"})), download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
-  window.alert("file ready for download."); return outbytes
-}
+  window.alert("file ready for download."); return outbytes}
 </script>
