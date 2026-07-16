@@ -1,4 +1,4 @@
-async function genfull(file): {
+async function genfull(file) {
   // once upon a time, there was a boy
   const byte = ((base) => new Uint8Array(base.buffer))
   const feet = ((baby) => new Uint8Array([baby,baby>>8,baby>>16,baby>>24])) // unhappy birthday to you
