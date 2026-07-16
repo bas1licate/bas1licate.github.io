@@ -7,7 +7,7 @@ permalink: /bmpgen
 <textarea placeholder="paste your thing here" id="textinput" name="john"></textarea><br />
 <label>or upload: <input type=file id="fileinput" name="george"/></label><br />
 <button onclick="gen('text')">generate from text</button><button onclick="gen('file')">generate from file</button><br />
-<a id="inoutput" name="rachel" download>output will go here</a><br />
+<a id="aoutput" name="rachel" download>output will go here</a><br />
 <ul> options:
   none at the moment. <!-- name=joseph> </!-->
 </ul>
@@ -50,9 +50,9 @@ function gen(method) {
   if (method == 'text') {var ok = new File([document.getElementById('textinput').value],"johnresult.txt")}
   if (method == 'file') {var ok = document.getElementById('fileinput').files[0]}
   
-  try {genfull(ok).then((fdata) => {var outbytes = fdata}).catch(e => console.error("something went issue",e))}
+  try {genfull(ok).then(fdata => (var outer = document.getElementById('aoutput')).href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
   catch (e) {window.alert("an error occured: "+e.message); console.error(e); return}
   
-  Object.assign(document.getElementById('inoutput'),{href: URL.createObjectURL(new Blob([outbytes],{type:"image/bmp"})), download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
+  Object.assign(document.getElementById('inoutput'),{download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
   window.alert("file ready for download."); return outbytes}
 </script>
