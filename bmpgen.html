@@ -39,7 +39,7 @@ async function genfull(file) {
   const Head1 = new Uint8Array([66,77,...feet(fs),0,0,0,0,...feet(54+o),0])
   const Head2 = new Uint8Array([40,0,0,0,...feet(dim[0]),...feet(dim[1]),1,0,...bury(bd*8),0,0,...feet(isz),11,19,0,0,11,19,0,0,0,0,0,0,0,0,0,0])
   // should mention dimensions are/were defined semi-arbitrarily due to operating from raw rgb
-  const full = new Uint8Array(fs); console.log(`data: ${isz} (${dim}, pad ${bpr}, depth ${bd}), + ${o} is ${fs}.`)
+  const full = new Uint8Array(fs); console.log(Head1,Head2)
   full.set(Head1,0); full.set(Head2,14);
   full.set(c,54)
   for (let i = o, j = 0, k=0,row = new Array(dim[0]/bd),rrow; k<dim[1]; i+=dim[0]+bpr,j+=dim[0],k++)
