@@ -38,7 +38,7 @@ async function genfull(file, dims = null, res = [2835,2835], cca = null, f8 = tr
   if (dims?.at(0) && dims?.at(1) && dims?.every(x => typeof x == 'number')) {var dim = dims.slice(0,2)}
   else {const ks = isz/bd; const hd = getdivs(ks).map(x=>ks/x)/*.reduce((a,v) => a*v,1)*/; var dim = [hd.at(-1),ks/hd.at(-1)]}
   const k=(bd==3?12:4); const bpr = k-bd*dim[0]%k;
-  const p = new Uint8Array(bpr).fill(0); const cc = c.byteLength
+  const p = new Uint8Array(bpr); const cc = c.byteLength
   isz += bpr*dim[1]; const o = 54+cc; const fs = isz+o;
   if (fs > 0xFFFFFFFF) {console.log(fs,isz,o,cc,bpr,dim,hd,ks); throw new RangeError("file would be too large")}
   const Head1 = new Uint8Array([66,77,...feet(fs),0,0,0,0,...feet(o)])
