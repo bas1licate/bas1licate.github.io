@@ -36,7 +36,7 @@ async function genfull(file, dims = null, res = [2835,2835], cca = null, f8 = fa
   function getdivs(k) {const res = []; for (let i = 2; i <= Math.sqrt(k); i++) {if (k%i==0) {res.push(k)}}; return res}
   //function tohalf(a) {const res = []; for (let i = 0; i < 2; i++) {res.push(a.slice(i,Math.ceil(a.length/2)))}; return res}
   if (dims?.at(0) && dims?.at(1) && dims?.every(x => typeof x == 'number')) {var dim = dims.slice(0,2)}
-  else {const ks = isz/bd; const hd = getdivs(ks).map(x=>ks/x)/*.reduce((a,v) => a*v,1)*/; var dim = [hd.at(-1),ks/hd.at(-1)]}
+  else {const ks = isz/bd; const hd = getdivs(ks).map(x=>ks/x)/*.reduce((a,v) => a*v,1)*/; var dim = [hd.at(-1),ks/hd.at(-1)]; console.log(getdivs(ks),hd)}
   const k=(bd==3?12:4); const bpr = k-bd*dim[0]%k;
   const p = new Uint8Array(bpr); const cc = c.byteLength
   isz += bpr*dim[1]; const o = 54+cc; const fs = isz+o;
