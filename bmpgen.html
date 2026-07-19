@@ -8,14 +8,16 @@ permalink: /bmpgen
 <label>or upload: <input type=file id="fileinput" name="george"/></label><br />
 <button onclick="try {gen('text')} catch (e) {lyk('generation failure: ',e)}">generate from text</button><button onclick="try {gen('file')} catch (e) {lyk('generation failure: ',e)}">generate from file</button><br />
 <a id="aoutput" name="rachel" download>output will go here</a><br />
-<ul name="joseph"> options: <!-- had to joseph something -->
+<ul> options:
   <li><label>dimensions ([W,L])<input id="par1" name="larry" /></label></li>
   <li><label>resolution ([W,L])<input id="par2" name="jerry" /></label></li>
   <li><label>8-bit color array ([B,G,R,X] repeated 1-256 times)<input id="par3" name="garry" /></label></li>
+  <li><label>force 8 bits<input type="checkbox" id="force8" name="joseph" /></label></li>
+  <li><label><span title="classic functionality - treats input as raw data rather than rgb data">raw mode</span><input type="checkbox" checked id="rawmode" name="maria" /></label></li>
 </ul>
 <script>// baby
-const lyk = (m,e) => {window.alert(m,e.message); throw e}
-async function genfull(file, dims = null, res = [2835,2835], cca = null) {
+const lyk = (m,e) => {window.alert(m+e.message); throw e}
+async function genfull(file, dims = null, res = [2835,2835], cca = null, f8 = false, raw = false) {
   // once upon a time, there was a boy
   const byte = ((base) => new Uint8Array(base.buffer))
   const feet = ((baby) => new Uint8Array([baby,baby>>8,baby>>16,baby>>24])) // unhappy birthday to you
@@ -23,11 +25,11 @@ async function genfull(file, dims = null, res = [2835,2835], cca = null) {
   if (file.size > 0xFFFFFFFF) {throw new RangeError("too much data")}
   if (file.size > 0xFFFFFAFF) {console.warn("this file is especially large. successful conversion cannot be guaranteed.")}
   else if (file.size > 0x7FFFFFFF) {console.warn("this file is very large. conversion may not work in certain environments.")}
-  let bytes = new Uint8Array(await file.arrayBuffer()); bytes.reverse()
+  let bytes = new Uint8Array(await file.arrayBuffer()); if (!raw) {bytes.reverse()}
   let isz = file.size/* no way in theyll im naming it is */; let bd;
   switch (0) {
-    case isz%3: bd=3;break
-    case isz%2: bd=2;break
+    case f8&&isz%3: bd=3;break
+    case f8&&isz%2: bd=2;break
     default: bd = 1; if (cca?.length) {var c = new Uint8Array(cca)} else {var c = new Uint8Array(1024); for (let i = 0; i < 256; i++) {c.set([i,i,i,0],4*i)}}}
   try {let d = [...c]}
   catch {var c = new Uint8Array(0)}
@@ -47,7 +49,7 @@ async function genfull(file, dims = null, res = [2835,2835], cca = null) {
   full.set(c,54)
   for (let i = o, j = 0, k=0,row = new Array(dim[0]/bd),rrow; k<dim[1]; i+=dim[0]+bpr,j+=dim[0],k++)
   {rrow = bytes.slice(j,j+dim[0]); for (let z = 0; z < dim[0]; z+=bd) {row[z/bd] = Array.from(rrow.slice(z,z+bd))};
-   full.set(new Uint8Array(row.reverse().flat()),i); full.set(p,dim[0]+i)}
+   full.set(new Uint8Array(raw ? row.flat() : row.reverse().flat()),i); full.set(p,dim[0]+i)}
   // i'm so tired of trying so hard and not getting it right
   return full}
 function gen(method) {
@@ -55,9 +57,10 @@ function gen(method) {
   if (method == 'file') {var ok = document.getElementById('fileinput').files[0]}
   let pars = []; try {for (let i = 1; i <= 3; i++) {let x = document.getElementById(`par${i}`).value; pars.push(x.length ? JSON.parse(x) : undefined)}}
   catch (e) {window.alert("error in param parsing: "+e.message); throw e}
+  const chkcheck = (box) => document.getElementById(box).checked
   if (pars[2] != null && [pars[2].length%4,pars[2].length-3,1025-pars[2].length].some(x => x<=0)) {throw new SyntaxError('invalid color table')}
   const outer = document.getElementById('aoutput')
-  try {genfull(ok,...pars).then(fdata => outer.href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
+  try {genfull(ok,...pars,chkcheck('force8'),chkcheck('rawmode')).then(fdata => outer.href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
   catch (e) {window.alert("an error occured: "+e.message); throw e}
   Object.assign(outer,{download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
   window.alert(`file ready for download. the output quality correlates to the input quality.`)}
