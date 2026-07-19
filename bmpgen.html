@@ -12,14 +12,14 @@ permalink: /bmpgen
   none at the moment. <!-- name=joseph> </!-->
 </ul>
 <script>// baby
-async function genfull(file) {
+async function genfull(file, dims = null, res = [2835,2835], cca = null) {
   // once upon a time, there was a boy
   const byte = ((base) => new Uint8Array(base.buffer))
   const feet = ((baby) => new Uint8Array([baby,baby>>8,baby>>16,baby>>24])) // unhappy birthday to you
   const bury = ((king) => new Uint8Array([king,king>>8])) // royal work of art
   if (file.size > 0xFFFFFFFF) {throw new RangeError("too much data")}
   if (file.size > 0xFFFFFAFF) {console.warn("this file is especially large. successful conversion cannot be guaranteed.")}
-  else if (file.size > 0x7FFFFFFF) {console.warn("this file is very large. conversion may not work on lower-end devices.")}
+  else if (file.size > 0x7FFFFFFF) {console.warn("this file is very large. conversion may not work in certain environments.")}
   let bytes = new Uint8Array(await file.arrayBuffer()); bytes.reverse()
   let isz = file.size/* no way in theyll im naming it is */; let bd;
   switch (0) {
