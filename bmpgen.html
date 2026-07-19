@@ -35,7 +35,7 @@ async function genfull(file, dims = null, res = [2835,2835], cca = null) {
   isz += bpr*dim[1]; const o = 54+cc; const fs = isz+o;
   if (fs > 0xFFFFFFFF) {throw new RangeError("file would be too large")}
   const Head1 = new Uint8Array([66,77,...feet(fs),0,0,0,0,...feet(o)])
-  const Head2 = new Uint8Array([40,0,0,0,...feet(dim[0]),...feet(dim[1]),1,0,...bury(bd*8),0,0,0,0,...feet(isz),...feet(res[0]),...feet(res[1]),...bury(cc),0,0,0,0])
+  const Head2 = new Uint8Array([40,0,0,0,...feet(dim[0]),...feet(dim[1]),1,0,...bury(bd*8),0,0,0,0,...feet(isz),...feet(res[0]),...feet(res[1]),...feet(cc),0,0,0,0])
   // should mention dimensions are/were defined semi-arbitrarily due to operating from raw rgb
   const full = new Uint8Array(fs); console.log(Head1,Head2,bytes)
   full.set(Head1,0); full.set(Head2,14);
