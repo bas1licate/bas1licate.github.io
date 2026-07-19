@@ -55,7 +55,7 @@ function gen(method) {
   if (method == 'file') {var ok = document.getElementById('fileinput').files[0]}
   let pars = []; try {for (let i = 1; i <= 3; i++) {let x = document.getElementById(`par${i}`).value; pars.push(x.length ? JSON.parse(x) : null)}}
   catch (e) {window.alert("error in param parsing: "+e.message); throw e}
-  if (pars[2].length % 4 || pars[2].length<4 || pars[2].length>1024) {throw new SyntaxError('invalid color table')}
+  if (pars[2] != null && [pars[2].length%4,pars[2].length-3,1025-pars[2].length].some(x => x<=0)) {throw new SyntaxError('invalid color table')}
   const outer = document.getElementById('aoutput')
   try {genfull(ok,...pars).then(fdata => outer.href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
   catch (e) {window.alert("an error occured: "+e.message); throw e}
