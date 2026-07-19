@@ -8,8 +8,10 @@ permalink: /bmpgen
 <label>or upload: <input type=file id="fileinput" name="george"/></label><br />
 <button onclick="gen('text')">generate from text</button><button onclick="gen('file')">generate from file</button><br />
 <a id="aoutput" name="rachel" download>output will go here</a><br />
-<ul> options:
-  none at the moment. <!-- name=joseph> </!-->
+<ul name="joseph"> options: <!-- had to joseph something -->
+  <li><label>dimensions ([W,L])<input id="par1" name="larry" /></label></li>
+  <li><label>resolution ([W,L])<input id="par2" name="jerry" /></label></li>
+  <li><label>8-bit color array ([B,G,R,X] repeated 1-256 times)<input id="par3" name="garry" /></label></li>
 </ul>
 <script>// baby
 async function genfull(file, dims = null, res = [2835,2835], cca = null) {
@@ -29,7 +31,9 @@ async function genfull(file, dims = null, res = [2835,2835], cca = null) {
   try {let d = [...c]}
   catch {var c = new Uint8Array(0)}
   function getdivs(k) {const res = []; for (let i = 2; i <= Math.sqrt(k); i++) {if (k%i==0) {res.push(k)}}; return res}
-  const ks = isz/bd; const hd = getdivs(ks); const dim = [hd[hd.length-1],ks/hd[hd.length-1]]
+  //function tohalf(a) {const res = []; for (let i = 0; i < 2; i++) {res.push(a.slice(i,Math.ceil(a.length/2)))}; return res}
+  if ((dims ?? false) && dims[0] && dims[1] && dims.every(x => typeof x == 'number')) {var dim = dims.slice(0,2)}
+  else {const ks = isz/bd; const hd = ks/getdivs(ks).reduce((a,v) => a*v,1); var dim = [hd,ks/hd]}
   const k=(bd==3?12:4); const bpr = k-bd*dim[0]%k;
   const p = new Uint8Array(bpr); const cc = c.byteLength
   isz += bpr*dim[1]; const o = 54+cc; const fs = isz+o;
