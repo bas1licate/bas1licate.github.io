@@ -17,7 +17,7 @@ permalink: /bmpgen
 </ul>
 <script>// baby
 const lyk = (m,e) => {window.alert(m+e.message); throw e}
-async function genfull(file, dims = null, res = [2835,2835], cca = null, f8 = false, raw = false) {
+async function genfull(file, dims = null, res = [2835,2835], cca = null, f8 = true, raw = false) {
   // once upon a time, there was a boy
   const byte = ((base) => new Uint8Array(base.buffer))
   const feet = ((baby) => new Uint8Array([baby,baby>>8,baby>>16,baby>>24])) // unhappy birthday to you
@@ -47,7 +47,7 @@ async function genfull(file, dims = null, res = [2835,2835], cca = null, f8 = fa
   const full = new Uint8Array(fs); console.log(Head1,Head2,bytes)
   full.set(Head1,0); full.set(Head2,14);
   full.set(c,54)
-  for (let i = o, j = 0, k=0,row = new Array(dim[0]/bd),rrow; k<dim[1]; i+=dim[0]+bpr,j+=dim[0],k++)
+  for (let i = o, j = 0, k=0,row = new Array(dim[0]),rrow; k<dim[1]; i+=dim[0]+bpr,j+=dim[0],k++)
   {rrow = bytes.slice(j,j+dim[0]); for (let z = 0; z < dim[0]; z+=bd) {row[z/bd] = Array.from(rrow.slice(z,z+bd))};
    full.set(new Uint8Array(raw ? row.flat() : row.reverse().flat()),i); full.set(p,dim[0]+i)}
   // i'm so tired of trying so hard and not getting it right
@@ -60,7 +60,7 @@ function gen(method) {
   const chkcheck = (box) => document.getElementById(box).checked
   if (pars[2] != null && [pars[2].length%4,pars[2].length-3,1025-pars[2].length].some(x => x<=0)) {throw new SyntaxError('invalid color table')}
   const outer = document.getElementById('aoutput')
-  try {genfull(ok,...pars,chkcheck('force8'),chkcheck('rawmode')).then(fdata => outer.href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
+  try {genfull(ok,...pars,!chkcheck('force8'),chkcheck('rawmode')).then(fdata => outer.href = URL.createObjectURL(new Blob([fdata],{type:"image/bmp"}))).catch(e => console.error("something went issue",e))}
   catch (e) {window.alert("an error occured: "+e.message); throw e}
   Object.assign(outer,{download: ok.name.split(".").slice(0,-1).join(".").concat(".bmp"), innerHTML: "download output"})
   window.alert(`file ready for download. the output quality correlates to the input quality.`)}
