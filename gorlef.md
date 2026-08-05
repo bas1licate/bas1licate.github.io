@@ -19,3 +19,5 @@ permalink: /gallery
 ![papuh climp](//pbs.twimg.com/media/E6mJoKaUYAAlDn8.jpg "let's see what you can do")
 
 [![marhsmaklow](//mewgenics.wiki.gg/images/BOSS_Hitler_III_Icon.svg)](https://example.com/wisdom)
+
+[![out of the ordinary, i mean](//picayune.uclick.com/comics/ga/2003/ga030121.gif)](//reddit.com/r/AlzheimersGroup "out of the ordinary, i mean")
