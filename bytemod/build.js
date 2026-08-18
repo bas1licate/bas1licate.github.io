@@ -7,7 +7,7 @@ const fileInput = Object.assign(qi.createElement("input"),{type: "file"})
 stuff.push(qi.createElement("label")); stuff.at(-1).append("only files are accepted:",fileInput)
 const bison = Object.assign(qi.createElement("button"),{innerHTML: "run (downloads automatically)"}); stuff.push(bison)
 stuff.push(qi.createElement("ul")); stuff.at(-1).append("operation:");
-["and #","ior #","xor #","negate","negative"].map(x => {let b = Object.assign(qi.createElement("label")); b.append(x,Object.assign(qi.createElement("button"),{type: "radio", name: "op", for: x})); return b}).forEach(x => {l = qi.createElement("li"); l.append(x); stuff.at(-1).append(l)})
+["and #","ior #","xor #","negate","negative"].map(x => {let b = Object.assign(qi.createElement("label")); b.append(x,Object.assign(qi.createElement("input"),{type: "radio", name: "op", for: x})); return b}).forEach(x => {l = qi.createElement("li"); l.append(x); stuff.at(-1).append(l)})
 stuff.push(qi.createElement("label")); goat = Object.assign(qi.createElement("input"),{type: "number", min: "0", max: "255"})
 stuff.at(-1).append("# for binary operationss: ",goat); let q
 qi.querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.for; goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
