@@ -19,5 +19,5 @@ async function basic() {
 }
 bison.addEventListener('click',() => {basic().then(fd => {outl.href = URL.createObjectURL(new Blob([fd])); outl.click()})})
 
-stuff.forEach(x => qi.body.appendChild(x))
+qi.body.append(...stuff); stuff.length = false
 // qi.getElementbyId("thyself").remove() // only possible use of getElementById in the entire script, which is entirely optional
