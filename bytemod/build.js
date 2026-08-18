@@ -11,7 +11,7 @@ stuff.push(doc.createElement("ul")); stuff.at(-1).append("operation:");
 stuff.push(doc.createElement("label")); goat = Object.assign(doc.createElement("input"),{type: "number", min: "0", max: "255"})
 stuff.at(-1).append("# for binary operationss: ",goat); let q
 doc.querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.value; goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
-outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff)
+outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff,q)
 async function basic() {
   const gv = goat.value; const p = new Uint8Array(await fileInput.files[0].arrayBuffer())
   return p.map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" ? -x : q=="plus #" ? x+gv : q=="minus #" ? x-gv : x)
