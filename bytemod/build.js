@@ -15,8 +15,8 @@ stuff.at(-1).append("# for binary operationss: ",goat); let q
 qi.querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.for; goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
 outl = Object.assign(qi.createElement("a"),{download: ""}); console.log(stuff)
 async function basic() {
-  const gv = goat.value;
-  return new Uint8Array(await fileInput.files[0].arrayBuffer()).map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" : -x)
+  const gv = goat.value; const p = new Uint8Array(await fileInput.files[0].arrayBuffer())
+  return p.map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" : -x)
 }
 bison.addEventListener('click',() => {basic().then(fd => {outl.href = URL.createObjectURL(new Blob(fd)); outl.click()})})
 
