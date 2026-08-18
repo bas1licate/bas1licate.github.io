@@ -12,12 +12,12 @@ stuff.push(qi.createElement("label")); goat = Object.assign(qi.createElement("in
 stuff.at(-1).append("# for binary operationss: ",goat); let q
 qi.querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.for; goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
 outl = Object.assign(qi.createElement("a"),{download: ""}); console.log(stuff)
-//async function basic() {
-//  const gv = goat.value; const p = new Uint8Array(await fileInput.files[0].arrayBuffer())
-//  try {return p.map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" ? -x : x)}
-//  catch (e) {console.error(e);console.warn(e.message)}
-//}
-//bison.addEventListener('click',() => {basic().then(fd => {outl.href = URL.createObjectURL(new Blob(fd)); outl.click()})})
+async function basic() {
+  const gv = goat.value; const p = new Uint8Array(await fileInput.files[0].arrayBuffer())
+  /*try {*/return p.map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" ? -x : x)/*}*/
+  //catch (e) {console.error(e);console.warn(e.message)}
+}
+bison.addEventListener('click',() => {basic().then(fd => {outl.href = URL.createObjectURL(new Blob(fd)); outl.click()})})
 
 stuff.forEach(x => qi.body.appendChild(x))
 // qi.getElementbyId("thyself").remove() // only possible use of getElementById in the entire script, which is entirely optional
