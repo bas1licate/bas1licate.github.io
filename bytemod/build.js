@@ -16,7 +16,7 @@ qi.querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click',
 outl = Object.assign(qi.createElement("a"),{download: ""}); console.log(stuff)
 async function basic() {
   const gv = goat.value; const p = new Uint8Array(await fileInput.files[0].arrayBuffer())
-  return p.map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" : -x)
+  return p.map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" ? -x : x)
 }
 bison.addEventListener('click',() => {basic().then(fd => {outl.href = URL.createObjectURL(new Blob(fd)); outl.click()})})
 
