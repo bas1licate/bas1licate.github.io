@@ -2,8 +2,8 @@ const qi = document // watch this never get used except retroactively due to mus
 
 const stuff = [];
 qi.head.appendChild(Object.assign(qi.createElement("title"),{innerHTML: "a strange case."}))
-qi.body.append("go ahead enter your stuff")
-const fileInput = Object.assign(qi.createElement("input"),{type: "file"})
+qi.body.append(qi.createElement("br"),"go ahead enter your stuff")
+const fileInput = Object.assign(qi.createElement("input"),{type: "file"}); stuff.push(qi.createElement("br"))
 stuff.push(qi.createElement("label")); stuff.at(-1).append("only files are accepted:",fileInput)
 const bison = Object.assign(qi.createElement("button"),{innerHTML: "run (downloads automatically)"}); stuff.push(bison)
 stuff.push(qi.createElement("ul")); stuff.at(-1).append("operation:");
