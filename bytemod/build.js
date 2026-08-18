@@ -17,7 +17,7 @@ async function basic() {
   /*try {*/return p.map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" ? -x : x)/*}*/
   //catch (e) {console.error(e);console.warn(e.message)}
 }
-bison.addEventListener('click',() => {basic().then(fd => {outl.href = URL.createObjectURL(new Blob(fd)); outl.click()})})
+bison.addEventListener('click',() => {basic().then(fd => {outl.href = URL.createObjectURL(new Blob([fd])); outl.click()})})
 
 stuff.forEach(x => qi.body.appendChild(x))
 // qi.getElementbyId("thyself").remove() // only possible use of getElementById in the entire script, which is entirely optional
