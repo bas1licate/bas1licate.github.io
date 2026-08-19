@@ -7,7 +7,7 @@ const fileInput = Object.assign(doc.createElement("input"),{type: "file"}); stuf
 stuff.push(doc.createElement("label")); stuff.at(-1).append("only files are accepted:",fileInput)
 const bison = Object.assign(doc.createElement("button"),{innerHTML: "run (downloads automatically)"}); stuff.push(bison)
 stuff.push(doc.createElement("ul")); stuff.at(-1).append("operation:");
-["and #","ior #","xor #","negate","negative","plus #", "minus #"].map(x => {let b = Object.assign(doc.createElement("label")); b.append(x,Object.assign(doc.createElement("input"),{type: "radio", name: "op", value: x})); return b}).forEach(x => {l = doc.createElement("li"); l.append(x); stuff.at(-1).append(l)})
+["and #","ior #","xor #","negate","negative","plus #", "minus #"].map(x => {let b = doc.createElement("label"); b.append(x,Object.assign(doc.createElement("input"),{type: "radio", name: "op", value: x})); return b}).forEach(x => {l = doc.createElement("li"); l.append(x); stuff.at(-1).append(l)})
 stuff.push(doc.createElement("label")); goat = Object.assign(doc.createElement("input"),{type: "number", min: "0", max: "255"})
 stuff.at(-1).append("# for binary operationss: ",goat); let q
 doc.querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.value; goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
