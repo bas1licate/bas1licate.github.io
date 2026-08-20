@@ -10,10 +10,11 @@ stuff.push(doc.createElement("ul")); stuff.at(-1).append("operation:");
 ["and #","ior #","xor #","negate","negative","plus #", "minus #"].map(x => {const b = doc.createElement("label"); b.append(x,Object.assign(doc.createElement("input"),{type: "radio", name: "op", value: x, checked: x == "negate"})); return b}).forEach(x => {let l = doc.createElement("li"); l.append(x); stuff.at(-1).append(l)})
 stuff.push(doc.createElement("label")); goat = Object.assign(doc.createElement("input"),{type: "number", min: "0", max: "255"})
 stuff.at(-1).append("# for binary operationss: ",goat); let q
-doc.querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.value; goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
+doc.querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.value; q?.length ?? window.alert("error setting."); goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
 const outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff)
 async function basic() {
-  const gv = goat.value; console.log(q,gv)
+  if (!goat.disabled && goat.value == "") {return window.alert("enter a number first.")}
+  const gv = goat.valueAsNumber; console.log(q,gv)
   return new Uint8Array(await fileInput.files[0].arrayBuffer()).map(x => q=="and #" ? x&gv : q=="ior #" ? x|gv : q=="xor #" ? x^gv : q=="negate" ? ~x : q=="negative" ? -x : q=="plus #" ? x+gv : q=="minus #" ? x-gv : x)
   //catch (e) {console.error(e);console.warn(e.message)}
 }
