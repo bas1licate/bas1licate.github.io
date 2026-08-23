@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<!DOCTYPE lol6 [
-	<!ELEMENT lol (#PCDATA)>
+<!DOCTYPE loly [
+	<!ELEMENT loly (#PCDATA)>
 	<!ENTITY lol1 "lollollollollollollollollollol">
 	<!ENTITY lol2 "&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;">
 	<!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">
@@ -8,4 +8,4 @@
 	<!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;">
 	<!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">
 ]>
-<lol6>&lol6;</lol6>
+<loly>&lol6;</loly>
