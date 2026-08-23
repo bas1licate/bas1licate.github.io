@@ -10,5 +10,5 @@ permalink: /index2.html
 [jeffrey qr.ae](../jeffreyqrae)  
 [disregard](../disregard)  
 [BMP generation (under maintenance)](../bmpgen)  
-[bytemod (pure, under construction)](../bytemod)
-[WAVEBREAK (pure)](../wavebreak)
+[bytemod (pure, under construction)](../bytemod)  
+[WAVEBREAK (pure)](../wavebreak)  
