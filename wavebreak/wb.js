@@ -7,7 +7,7 @@ async function wave(file) {
     const head1 = new Uint16Array([18770,17990,...s32(sz+36),16727,17750])
     const head2 = new Uint16Array([28006,8308,16,0,1,1,44100,0,22664,1,2,16])
     const head3 = new Uint16Array([24932,24948,...s32(sz)])
-    const r = new Uint8Array(x ? sz+44: 60);
+    const r = new Uint8Array(x ? 2*Math.ceil(sz/2)+44: 60);
     r.set(to8(head1),0);r.set(to8(head2),12);r.set(to8(head3),36)
     r.set(x ? FB : new Uint8Array([91, 111, 98, 106, 101, 99, 116, 32, 80, 114, 111, 109, 105, 115, 101, 93]),44)
     return r;
