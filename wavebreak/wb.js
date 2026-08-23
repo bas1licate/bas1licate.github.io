@@ -15,10 +15,10 @@ async function wave(file) {
 
 const doc = document
 const stuff = [];
-doc.body.append("gaa videre, skriv inn «stuff» din",doc.createElement("br"))
+doc.body.append("go ahead enter your stuff",doc.createElement("br"))
 const fi = Object.assign(doc.createElement("input"),{type: "file"}); stuff.push(doc.createElement("br"))
-stuff.push(doc.createElement("label")); stuff.at(-1).append("kun filer godtas:",fi)
-const bison = Object.assign(doc.createElement("button"),{innerHTML: "kjoer (lastes ned automatisk)"}); stuff.push(bison)
+stuff.push(doc.createElement("label")); stuff.at(-1).append("only files are accepted:",fi)
+const bison = Object.assign(doc.createElement("button"),{innerHTML: "run (downloads automatically)"}); stuff.push(bison)
 const outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff); let fi0 = fi?.files?.[0]
 bison.addEventListener('click',() => {fi0 = fi.files[0]; wave(fi0).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd])), download: fi0.name.split(".").length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()})})
 doc.body.append(...stuff); stuff.length = false
