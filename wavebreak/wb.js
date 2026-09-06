@@ -1,7 +1,7 @@
 async function wave(file) {
-    const n32 = (t : number) => new Uint32Array(t) // remove as soon as sample rate is added
-    const n16 = (t : number) => new Uint16Array(t) // remove as soon as everything else is added
-    const to8 = t => new Uint8Array(t.buffer)
+    const n32 = t => new Uint32Array(t) // remove as soon as sample rate is added
+    const n16 = t => new Uint16Array(t) // remove as soon as everything else is added
+    const to8 = t => new Uint8Array(t)
     const FB = new Uint8Array(await file.arrayBuffer()); const sz = 2*Math.ceil(FB.byteLength/2); let x
     if (sz > 0xFFFFFF00) {console.error("data too large. maximum size 4,294,967,040 bytes."); x = false} else {x = true}
     if (sz > 0x7FFFFF00) {console.warn("data very large. successful conversion cannot be guaranteed.")}
