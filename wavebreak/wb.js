@@ -1,8 +1,9 @@
 async function wave(file,sr=44100,sb=16,fs=false) {
+    sb%8 && (()=>{throw new Error("invalid bit depth")})()
     const n16 = t => new Uint16Array([t]) // remove if possible
     const to8 = t => new Uint8Array(t.buffer)
     const tQ8 = t => to8(new Uint32Array([t]))
-    const FB = new Uint8Array(await file.arrayBuffer()); const sz = 2*Math.ceil(FB.byteLength/2); let x
+    const FB = new Uint8Array(await file.arrayBuffer()); const sz = sb/8*Math.ceil(8*FB.byteLength/sb); let x
     if (sz > 0xFFFFFF00) {console.error("data too large. maximum size 4,294,967,040 bytes."); x = false} else {x = true}
     if (sz > 0x7FFFFF00) {console.warn("data very large. successful conversion cannot be guaranteed.")}
     const head1 = new Uint8Array([82,73,70,70,...tQ8(sz+36),87,65,86,69])
