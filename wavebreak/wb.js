@@ -19,8 +19,8 @@ const doc = document
 const stuff = [];
 const docbr = () => document.createElement("br")
 doc.body.append("go ahead enter your stuff",docbr())
-const fi = Object.assign(doc.createElement("input"),{type: "file"}); stuff.push(docbr())
-stuff.push(doc.createElement("label")); stuff.at(-1).append("only files are accepted:",fi)
+const fi = Object.assign(doc.createElement("input"),{type: "file"})
+stuff.push(doc.createElement("label")); stuff.at(-1).append("only files are accepted:",fi,docbr())
 const bison = Object.assign(doc.createElement("button"),{innerHTML: "run (downloads automatically)"}); stuff.push(bison)
 const outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff); let fi0 = fi?.files?.[0]
 stuff.push(doc.createElement("div")); sal = stuff.at(-1)
