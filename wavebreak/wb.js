@@ -7,7 +7,7 @@ async function wave(file,sr=44100,sb=16,fs=false) {
     if (sz > 0xFFFFFF00) {console.error("data too large. maximum size 4,294,967,040 bytes."); x = false} else {x = true}
     if (sz > 0x7FFFFF00) {console.warn("data very large. successful conversion cannot be guaranteed.")}
     const head1 = new Uint8Array([82,73,70,70,...tQ8(sz+36),87,65,86,69])
-    const head2 = new Uint8Array([102,109,116,32,16,0,0,0,...to8(n16(1+2*fs)),1,0,...tQ8(sr),...tQ8(sr*sb/8),...to8(n16(sb/8)),...to8(n16(sb))]) //everything static here for now, but not later
+    const head2 = new Uint8Array([102,109,116,32,16,0,0,0,...to8(n16(1+2*fs)),1,0,...tQ8(sr),...tQ8(sr*sb/8),...to8(n16(sb/8)),...to8(n16(sb))])
     const head3 = new Uint8Array([100,97,116,97,...tQ8(sz)])
     const r = new Uint8Array(x ? sz+44 : 60);
     r.set(head1,0);r.set(head2,12);r.set(head3,36)
@@ -27,5 +27,5 @@ stuff.push(doc.createElement("div")); sal = stuff.at(-1)
 sal.append("miscellaneous options:",docbr())
 const sam = Object.assign(doc.createElement("input"),{type: "number", id: "sam", min: 0, max: 0xffffffff, value: 44100})
 sal.append(Object.assign(doc.createElement("label"),{for: "sam", textContent: "Sample rate (Hz): "}),sam,docbr())
-bison.addEventListener('click',() => {fi0 = fi.files[0]; wave(fi0,sam.value).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd])), download: fi0.name.split(".").length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()})})
+bison.addEventListener('click',() => {fi0 = fi.files[0]; wave(fi0,sam.value).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd])), download: fi0.name.split(".").filter(Boolean).length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()})})
 doc.body.append(...stuff); stuff.length = false
