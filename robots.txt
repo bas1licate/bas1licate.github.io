@@ -4,3 +4,5 @@ Crawl-delay: 5
 User-agent: PerplexityBot
 Disallow: /
 Crawl-delay: 4500000
+User-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
+Disallow: /`1234567890-=asdfghjkl;'zxcvbnm,./*
