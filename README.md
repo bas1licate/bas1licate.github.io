@@ -1,4 +1,4 @@
-# what is this site for?
+# what is [this site](//bas1licate.github.io) for?
 html stuff that i want people to see  
 expect experiments
 # copyright complication
