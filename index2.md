@@ -12,4 +12,5 @@ permalink: /index2.html
 [BMP generation (under maintenance)](../bmpgen)  
 [bytemod (pure)](../bytemod)  
 [WAVEBREAK (pure)](../wavebreak)  
-[ ](../colors)
+
+[I Say Name 100 Colors](../colors)
