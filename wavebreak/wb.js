@@ -27,7 +27,7 @@ stuff.push(doc.createElement("div")); sal = stuff.at(-1)
 sal.append("miscellaneous options:",docbr())
 const sam = Object.assign(doc.createElement("input"),{type: "number", id: "sam", min: 0, max: 0xffffffff, value: 44100})
 sal.append(Object.assign(doc.createElement("label"),{for: "sam", innerText: "Sample rate (Hz): "}),sam,docbr())
-const bps = Object.assign(doc.createElement("input"),{type: "number", id: "bps", min: 0x1, max: 0x100, value: 0x20, disabled: true})
+const bps = Object.assign(doc.createElement("input"),{type: "number", id: "bps", min: 0x1, max: 0x100, value: 0x10, disabled: true})
 sal.append(Object.assign(doc.createElement("label"),{for: "bps", innerText: "bits per sample (coming soon): "}),bps,docbr())
 bison.addEventListener('click',() => {fi0 = fi.files[0]; wave(fi0,sam.value,bps.value).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd],type='audio/wav')), download: fi0.name.split(".").filter(Boolean).length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()})})
 doc.body.append(...stuff); stuff.length = false
