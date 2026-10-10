@@ -3,5 +3,4 @@
   const coal = Object.assign(document.createElement("button"), {"value": "yes click here, but be warned: you can't go back once you do."});
   coal.addEventListener("click", async () => window.location.replace(URL.createObjectURL(await (await fetch(gem.value)).blob())));
   document.documentElement.append(gem, coal); /* until content loads */
-  document.addEventListener("DOMContentLoaded", () => document.body.append(gem,coal))
 })().then(console.log).catch(e => {for (x of [console.error,globalThis.alert].filter(x=>x)) x("GOT YOU",e)})</script></head><body><noscript>you can't go anywhere without a permission slip! enable javascript (at least for this page or site) first.</noscript></body></html>
