@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="en"><head><title>let's go somewhere.</title><script defer>(async () => { // if you ever need to await in "global"scope
+  const gem = Object.assign(document.createElement("input"), {"type": "url", "value": "data:text/plain,enter ANY uri in here then click below"})
+  const coal = Object.assign(document.createElement("button"), {"value": "yes click here, but be warned: you can't go back once you do."})
+  coal.addEventListener("click", async () => window.location.replace(URL.createObjectURL(await (await fetch(gem.value)).blob())))
+})().catch(e => {for (x of [console.error,globalThis.alert].filter(Boolean)) x("GOT YOU",e)})</script></head><body><noscript>you can't go anywhere without a permission slip! enable javascript (at least for this page or site) first.</noscript></body></html>
