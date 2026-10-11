@@ -1,9 +1,13 @@
 async function wave(file,sr=44100,sb=16,fs=false) {
-    sb%8 && (()=>{throw new Error("invalid bit depth")})()
+    sb&7 && (()=>{throw new Error("invalid bit depth")})(); let dw;
+    [1,2,3,4,8].includes(sb>>3) || (dw = console.warn(`unusual bit depth (general): ${sb}`) ?? 1)
+    dw || ((fs ? sb&31 : sb&64) && console.warn(`unusual bit depth for ${fs ? "float" : "linear"}: ${sb}`))
+    sb-8 || sc || sr>>=1
     const n16 = t => new Uint16Array([t]) // remove if possible
     const to8 = t => new Uint8Array(t.buffer)
     const tQ8 = t => to8(new Uint32Array([t]))
-    const FB = new Uint8Array(await file.arrayBuffer()); const sz = sb/8*Math.ceil(8*FB.byteLength/sb); let x
+    const g0 = (a, b=a) => (!a[1] ? (b[0]*b[1])/a[0] : g0([a[1],a[0]%a[1]],b)); const g1 = g0([2,sb>>3])<<3;
+    const FB = new Uint8Array(await file.arrayBuffer()); const sz = sb/g1*Math.ceil(g1*FB.byteLength/sb); let x
     if (sz > 0xFFFFFF00) {console.error("data too large. maximum size 4,294,967,040 bytes."); x = false} else {x = true}
     if (sz > 0x7FFFFF00) {console.warn("data very large. successful conversion cannot be guaranteed.")}
     const head1 = new Uint8Array([82,73,70,70,...tQ8(sz+36),87,65,86,69])
@@ -25,9 +29,9 @@ const bison = Object.assign(doc.createElement("button"),{innerText: "run (downlo
 const outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff); let fi0 = fi?.files?.[0]
 stuff.push(doc.createElement("div")); sal = stuff.at(-1)
 sal.append("miscellaneous options:",docbr())
-const sam = Object.assign(doc.createElement("input"),{type: "number", id: "sam", min: 0, max: 0xffffffff, value: 44100})
+let sc; const sam = Object.assign(doc.createElement("input"),{type: "number", id: "sam", min: 0, max: 0xffffffff, value: 44100, oninput: () => {sc=1})
 sal.append(Object.assign(doc.createElement("label"),{for: "sam", innerText: "Sample rate (Hz): "}),sam,docbr())
-const bps = Object.assign(doc.createElement("input"),{type: "number", id: "bps", min: 0x1, max: 0x100, value: 0x10, disabled: true})
-sal.append(Object.assign(doc.createElement("label"),{for: "bps", innerText: "bits per sample (coming soon): "}),bps,docbr())
-bison.addEventListener('click',() => {fi0 = fi.files[0]; wave(fi0,sam.value,bps.value).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd],type='audio/wav')), download: fi0.name.split(".").filter(Boolean).length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()})})
+const bps = Object.assign(doc.createElement("input"),{type: "number", id: "bps", min: 1, max: 16, value: 1, disabled: true})
+sal.append(Object.assign(doc.createElement("label"),{for: "bps", innerText: "bytes per sample (coming soon): "}),bps,docbr())
+bison.addEventListener('click',() => {fi0 = fi.files[0]; wave(fi0,sam.value,8*bps.value).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd],type='audio/wav')), download: fi0.name.split(".").filter(Boolean).length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()})})
 doc.body.append(...stuff); stuff.length = false
