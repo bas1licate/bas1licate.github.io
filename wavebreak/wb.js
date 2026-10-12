@@ -20,20 +20,21 @@ async function wave(file,sr=44100,sb=16,fs=false) {
 }
 
 const doc = document
-const stuff = [];
-const docbr = () => document.createElement("br")
+const stuff = []; const dbody = doc.createElement("body")
+const docbr = () => doc.createElement("br")
 doc.body.append("go ahead enter your stuff",docbr())
 const fi = Object.assign(doc.createElement("input"),{type: "file"})
 stuff.push(doc.createElement("label")); stuff.at(-1).append("only files are accepted:",fi,docbr())
 const bison = Object.assign(doc.createElement("button"),{innerText: "run (downloads automatically)"}); stuff.push(bison)
-const outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff); let fi0 = fi?.files?.[0]; stuff.push(doc.createTextNode("(if the download doesn't work, run `doc.body.append(outl)` in the console to be able to manually download)"))
-stuff.push(doc.createElement("div")); sal = stuff.at(-1)
+const outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(Array.from(stuff)); let fi0 = fi?.files?.[0]; // stuff.push(doc.createTextNode("(if the download doesn't work, run `doc.body.append(outl)` in the console to be able to manually download)"))
+dbody.append(...stuff); stuff.length = false
+const sal = doc.createElement("div");
 sal.append("miscellaneous options:",docbr())
-let sc; const sam = Object.assign(doc.createElement("input"),{type: "number", id: "sam", min: 0, max: 0xffffffff, value: 44100, oninput: () => {sc=1})
+let sc; const sam = Object.assign(doc.createElement("input"),{type: "number", id: "sam", min: 0, max: 0xffffffff, value: 44100, oninput: () => (sc=1)})
 sal.append(Object.assign(doc.createElement("label"),{for: "sam", innerText: "Sample rate (Hz): "}),sam,docbr())
 const bps = Object.assign(doc.createElement("input"),{type: "number", id: "bps", min: 1, max: 16, value: 1})
 sal.append(Object.assign(doc.createElement("label"),{for: "bps", innerText: "bytes per sample (coming soon): "}),bps,docbr())
 const fsc = Object.assign(doc.createElement("input"),{type: "checkbox", id: "fsc"})
 sal.append(Object.assign(doc.createElement("label"),{for: "fsc", innerText: "use floating-point samples (instead of linear samples): "}),fsc,docbr())
-bison.addEventListener('click',() => {fi0 = fi.files[0]; wave(fi0,sam.value,8*bps.value,fsc.checked).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd],type='audio/wav')), download: fi0.name.split(".").filter(Boolean).length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()}).catch((e) => {for (let cout of [console.error.bind(console),globalThis?.alert].filter(Boolean)) {cout("failed to process and/or download: ",e)}})})
-doc.body.append(...stuff); stuff.length = false
+bison.onclick = () => {fi0 = fi.files[0]; wave(fi0,sam.value,8*bps.value,fsc.checked).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd],type='audio/wav')), download: fi0.name.split(".").filter(Boolean).length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()}).catch((e) => {for (let cout of [console.error.bind(console),globalThis?.alert].filter(Boolean)) {cout("failed to process and/or download: ",e)}})}
+console.log(dbody.appendChild(sal)); doc.body = dbody;
