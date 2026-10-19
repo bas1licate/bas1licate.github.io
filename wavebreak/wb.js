@@ -31,10 +31,10 @@ dbody.append(...stuff); stuff.length = false
 const sal = doc.createElement("div");
 sal.append("miscellaneous options:",docbr())
 let sc; const sam = Object.assign(doc.createElement("input"),{type: "number", id: "sam", min: 0, max: 0xffffffff, value: 44100, oninput: () => (sc=1)})
-sal.append(Object.assign(doc.createElement("label"),{for: "sam", innerText: "Sample rate (Hz): "}),sam,docbr())
+sal.append(Object.assign(doc.createElement("label"),{htmlFor: "sam", innerText: "Sample rate (Hz): "}),sam,docbr())
 const bps = Object.assign(doc.createElement("input"),{type: "number", id: "bps", min: 1, max: 16, value: 1})
-sal.append(Object.assign(doc.createElement("label"),{for: "bps", innerText: "bytes per sample (slightly experimental): "}),bps,docbr())
+sal.append(Object.assign(doc.createElement("label"),{htmlFor: "bps", innerText: "bytes per sample (slightly experimental): "}),bps,docbr())
 const fsc = Object.assign(doc.createElement("input"),{type: "checkbox", id: "fsc"})
-sal.append(Object.assign(doc.createElement("label"),{for: "fsc", innerText: "use floating-point samples (instead of linear samples): "}),fsc,docbr())
-bison.onclick = () => {fi0 = fi.files[0]; wave(fi0,sam.value,8*bps.value,fsc.checked).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd],type='audio/wav')), download: fi0.name.split(".").filter(Boolean).length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()}).catch((e) => {for (let cout of [console.error.bind(console),globalThis?.alert].filter(Boolean)) {cout("failed to process and/or download: ",e)}})}
+sal.append(Object.assign(doc.createElement("label"),{htmlFor: "fsc", innerText: "use floating-point samples (instead of linear samples): "}),fsc,docbr())
+bison.onclick = () => {fi0 = fi.files[0]; wave(fi0,sam.value,8*bps.value,fsc.checked).then(fd => {Object.assign(outl, {href: URL.createObjectURL(new Blob([fd],{"type": "audio/wav"})), download: fi0.name.split(".").filter(Boolean).length > 1 ? fi0.name.split(".").slice(0,-1).join(".").concat(".wav") : fi0.name.concat(".wav")}).click()}).catch((e) => {for (let cout of [console.error.bind(console),globalThis?.alert].filter(Boolean)) {cout("failed to process and/or download: "+e.toString())}})}
 console.log(dbody.appendChild(sal)); doc.body = dbody;
