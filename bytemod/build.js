@@ -11,7 +11,7 @@ stuff.push(doc.createElement("ul")); stuff.at(-1).append("operation:");
 stuff.push(doc.createElement("label")); const goat = Object.assign(doc.createElement("input"),{type: "number", min: "0", max: "255"})
 stuff.at(-1).append("# for binary operationss: ",goat); let q; stuff.push(doc.createElement("br"));
 stuff.at(-2).querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.value; q?.length ?? window.alert("error setting."); goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
-stuff.push(Object.assign(doc.createElement("label"),{htmlFor: "skip"})); const skip = Object.assign(doc.createElement("input"),{type: "number", min: "0", id: "skip"}); stuff.at(-1).append("skip first # bytes"); skip.prepend(stuff.at(-1)); stuff.at(-1).replaceWith(skip);
+const skip = Object.assign(doc.createElement("input"),{type: "number", min: "0", id: "skip"}); skip.appendChild(Object.assign(doc.createElement("label"),{htmlFor: "skip"})).append("skip first # bytes"); stuff.push(skip);
 const outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff)
 async function basic() {
   if (!goat.disabled && goat.value == "") {return window.alert("enter a number first.")}
