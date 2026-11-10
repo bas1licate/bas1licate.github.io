@@ -9,7 +9,7 @@ const bison = Object.assign(doc.createElement("button"),{innerHTML: "run (downlo
 stuff.push(doc.createElement("ul")); stuff.at(-1).append("operation:");
 ["and #","ior #","xor #","negate","negative","plus #", "minus #", "round to #", "nothing (default)"].map(x => {const b = doc.createElement("label"); b.append(x,Object.assign(doc.createElement("input"),{type: "radio", name: "op", value: x, checked: x.includes("default")})); return b}).forEach(x => {let l = doc.createElement("li"); l.append(x); stuff.at(-1).append(l)})
 stuff.push(doc.createElement("label")); const goat = Object.assign(doc.createElement("input"),{type: "number", min: "0", max: "255"})
-stuff.at(-1).append("# for binary operationss: ",goat); let q; stuff.push(doc.createElement("br"));
+stuff.at(-1).append("# for binary operationss: ",goat,doc.createElement("br")); let q;
 stuff.at(-2).querySelectorAll('input[name="op"]').forEach(x => x.addEventListener('click', () => {q = x.value; q?.length ?? window.alert("error setting."); goat.disabled = ['negate','negative'].includes(q); if (goat.disabled) {goat.value = null}}))
 const skip = Object.assign(doc.createElement("input"),{type: "number", min: "0", id: "skip"}); stuff.push((x=>{x.append("skip first # bytes"); return x;})(Object.assign(doc.createElement("label"),{htmlFor: "skip"})),skip);
 const outl = Object.assign(doc.createElement("a"),{download: ""}); console.log(stuff)
