@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /*.md*
+Disallow: /no
 Crawl-delay: 5
 User-agent: PerplexityBot
 Disallow: /
